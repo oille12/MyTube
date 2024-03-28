@@ -57,7 +57,7 @@ export default function App() {
     <>
     <header className="fixed w-full top-0 box-content bg-black">
       <div className="flex justify-between h-12">
-        {/* 메뉴 로고 */}
+        {/* 상단 메뉴 로고들 */}
         <div className="flex items-center">
           {/* 사이드바 메뉴 버튼 */}
           <button

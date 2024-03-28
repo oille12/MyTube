@@ -14,26 +14,38 @@ const TITLES = [
 ];
 
 export default function Search({active, setActive}) {
-    const [question, setQuestion] = useState("");
+    // 검색어 저장
+    const [query, setQuery] = useState("");
+    // auto focus
     const inputRef = useRef(null);
      
+    // 엘리먼트에 접근 후 autofocus 호출
     useEffect(() => {
         if (active) {
         inputRef.current.focus();
         }
     })
 
-    const titleLists = TITLES.filter(name => name.indexOf(question.toLocaleLowerCase()) > -1).map(name => (
+    // 검색 결과
+    const titleLists = TITLES
+    // name : 각 title
+        .filter(name => name.indexOf(query.toLocaleLowerCase()) > -1)
+        .map(name => (
         <li key={name} className="mb-2 text-white">{name}</li>
     ))
-
+    
+    // 검색창 닫기
     function handleClose() {
         setActive(false);
-        setQuestion("");
+        // 기존 검색어 삭제 
+        setQuery("");
     }
 
     return(
-        <div className="fixed inset-0 bg-black hidden" style={{display:active && "block"}}>
+        <div 
+            className="fixed inset-0 bg-black hidden" 
+            style={{display:active && "block"}}
+        >
             <div className="flex items-center mt-4 px-4">
             <svg
                 className="w-4 fill-white"
@@ -46,13 +58,15 @@ export default function Search({active, setActive}) {
             <input
                 className="w-full px-4 py-1 ml-2 bg-zinc-800 text-white outline-none rounded-full"
                 type="text"
-                value={question}
-                onChange={({target}) => setQuestion(target.value)}
+                value={query}
+                onChange={({ target }) => setQuery(target.value)}
                 placeholder="Search MyTube"
                 ref={inputRef}
             />
             </div>
-            <ul className="mt-4 px-4">{question.trim() && titleLists}</ul>
+            <ul className="mt-4 px-4">
+                {query.trim() && titleLists}
+            </ul>
         </div>
     )
 }

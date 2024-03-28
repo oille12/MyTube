@@ -7,7 +7,10 @@ export default function SideBar({active, setActive}) {
     return(
         <>
             {/* nav */}
-            <nav className="fixed top-0 -left-60 w-60 h-screen px-4 z-20 transition-all bg-black text-white" style={{left:active && "0px"}}>
+            <nav 
+                className="fixed top-0 -left-60 w-60 h-screen px-4 z-20 transition-all bg-black text-white" 
+                style={{ left:active && "0px" }}
+            >
                 <div className="my-4 flex items-center">
                     <svg
                         className="w-8 fill-white"
@@ -28,9 +31,10 @@ export default function SideBar({active, setActive}) {
                 </ul>
             </nav>
 
-            {/* 네비클릭시 암흑 배경 */}
-            <div className="fixed inset-0 bg-black/[0.4] hidden"
-                style={{display:active && "block"}}
+            {/* 오버레이 */}
+            <div
+                className="fixed inset-0 bg-black/[0.4] hidden"
+                style={{ display:active && "block" }}
                 onClick={() => setActive(false)}
             >
             </div>

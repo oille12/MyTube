@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// 옵션리스트 4개
+// 투표 옵션리스트 4개
 const OPTIONS = [
     { id:"o1", name:"팝" },
     { id:"o2", name:"락/밴드" },
@@ -8,19 +8,22 @@ const OPTIONS = [
     { id:"o4", name:"발라드" }
 ]
 
-// 로컬스토리 > 데이터 저장 함수
+// 로컬스토리 동기화 처리 : 데이터 저장 함수
 function saveData(id) {
     localStorage.setItem("survey", id);
 }
 
 export default function Survey() {
+    // 선택된 옵션의 id 저장
     const [selectedId, setSelectedId] = useState(localStorage.getItem("survey"));
 
+    // 선택 처리
     function handleChange(id) {
         saveData(id)
         setSelectedId(id);
     }
 
+    // 옵션 리스트
     const optionLists = OPTIONS.map(option => (
         <li key={option.id} className="mb-2">
             <input 
@@ -29,6 +32,7 @@ export default function Survey() {
                 name="survey"
                 className="peer hidden"
                 checked={option.id === selectedId}
+                // change 이벤트 : radio의 체크상태가 바뀔 떄 발생
                 onChange={() => handleChange(option.id)}
             />
             <label
@@ -43,7 +47,7 @@ export default function Survey() {
     return (
         <>
             <h3 className="text-lg my-4 font-semibold text-white">
-                음악 장르 중 어떤 걸 선호하십니까?
+                선호하는 음악 장르는 무엇입니까?
             </h3>
 
             <ol>
